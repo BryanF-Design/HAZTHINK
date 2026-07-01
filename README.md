@@ -24,7 +24,12 @@ Abrir `index.html` en navegador, o servir la carpeta con cualquier servidor est�
 - Reemplazar las tarjetas de ejemplo de "Proyectos" con casos reales conforme estén
   disponibles.
 
+## Cotización (histórico)
+
+La propuesta original que se usó para vender el proyecto a HAZTHINK (COT-HAZTHINK-2026-001)
+vive en [`cotizacion/`](./cotizacion/) y ya no se publica desde la raíz del sitio.
+
 ## Publicar
 
 Subir la carpeta completa a cualquier hosting estático (configurado para Vercel via
-`vercel.json`).
+`vercel.json`). La carpeta `cotizacion/` es interna y no debe enlazarse desde el sitio público.
