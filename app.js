@@ -50,6 +50,42 @@ if (supportsFinePointer && cursorDot && cursorRing) {
   });
 }
 
+/* 3D tilt: cards tilt toward the pointer, the hero stage tilts across the whole hero */
+if (window.matchMedia("(pointer: fine)").matches) {
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  document.querySelectorAll(".service-card, .contact-item").forEach((card) => {
+    card.addEventListener("mousemove", (event) => {
+      const rect = card.getBoundingClientRect();
+      const px = (event.clientX - rect.left) / rect.width - 0.5;
+      const py = (event.clientY - rect.top) / rect.height - 0.5;
+      card.style.setProperty("--rx", `${clamp(-py * 14, -10, 10)}deg`);
+      card.style.setProperty("--ry", `${clamp(px * 14, -10, 10)}deg`);
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.setProperty("--rx", "0deg");
+      card.style.setProperty("--ry", "0deg");
+    });
+  });
+
+  const heroStage = document.querySelector(".hero-stage");
+  const stageTilt = document.querySelector(".stage-tilt");
+
+  if (heroStage && stageTilt) {
+    heroStage.addEventListener("mousemove", (event) => {
+      const rect = heroStage.getBoundingClientRect();
+      const px = (event.clientX - rect.left) / rect.width - 0.5;
+      const py = (event.clientY - rect.top) / rect.height - 0.5;
+      stageTilt.style.setProperty("--rx", `${clamp(8 - py * 16, -8, 20)}deg`);
+      stageTilt.style.setProperty("--ry", `${clamp(-12 + px * 20, -28, 4)}deg`);
+    });
+    heroStage.addEventListener("mouseleave", () => {
+      stageTilt.style.setProperty("--rx", "8deg");
+      stageTilt.style.setProperty("--ry", "-12deg");
+    });
+  }
+}
+
 /* Scroll reveal */
 const revealItems = document.querySelectorAll(".reveal");
 
@@ -98,29 +134,37 @@ if (window.anime) {
     easing: "easeOutCubic",
   });
 
+  /* Keep each mock's static 3D offset (set in CSS) while animating a float loop on top of it. */
   anime({
-    targets: ".hero-blob-1",
-    translateY: [0, -24],
-    duration: 5200,
-    direction: "alternate",
+    targets: ".hero-stage .mock-post",
+    translateZ: 60,
+    rotate: -6,
+    translateY: [
+      { value: -14, duration: 2600 },
+      { value: 0, duration: 2600 },
+    ],
     loop: true,
     easing: "easeInOutSine",
   });
   anime({
-    targets: ".hero-blob-2",
-    translateY: [0, 18],
-    translateX: [0, -12],
-    duration: 4200,
-    direction: "alternate",
+    targets: ".hero-stage .mock-brand",
+    translateZ: 110,
+    rotate: 4,
+    translateY: [
+      { value: 10, duration: 3100 },
+      { value: 0, duration: 3100 },
+    ],
     loop: true,
     easing: "easeInOutSine",
   });
   anime({
-    targets: ".hero-blob-3",
-    translateY: [0, -14],
-    translateX: [0, 10],
-    duration: 4800,
-    direction: "alternate",
+    targets: ".hero-stage .mock-banner",
+    translateZ: 20,
+    rotate: 3,
+    translateY: [
+      { value: -8, duration: 3600 },
+      { value: 0, duration: 3600 },
+    ],
     loop: true,
     easing: "easeInOutSine",
   });
@@ -150,7 +194,7 @@ if (stackCards.length) {
       }
       const nextTop = next.getBoundingClientRect().top;
       const progress = Math.min(Math.max((stickyTop(index + 1) + 220 - nextTop) / 220, 0), 1);
-      card.style.transform = `scale(${1 - 0.06 * progress}) translateY(${-14 * progress}px)`;
+      card.style.transform = `perspective(1200px) rotateX(${6 * progress}deg) scale(${1 - 0.06 * progress}) translateY(${-14 * progress}px)`;
       card.style.filter = `brightness(${1 - 0.2 * progress})`;
     });
     ticking = false;
