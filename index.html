@@ -5,45 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="HAZTHINK — estudio de diseño, impresión y publicidad. Redes sociales, lonas, identidad corporativa, publicidad e invitaciones."
+      content="HAZTHINK — estudio de diseño, impresión y publicidad en México. Redes sociales, lonas, identidad corporativa, publicidad e invitaciones."
     />
-    <meta name="theme-color" content="#fffaf5" />
+    <meta name="theme-color" content="#fff5f9" />
     <title>HAZTHINK — Diseñamos para conectar</title>
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23FF2D78'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' font-weight='700' fill='white' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E"
     />
     <link rel="stylesheet" href="./styles.css" />
-    <script>
-      document.documentElement.classList.add("js");
-    </script>
+    <script>document.documentElement.classList.add("js");</script>
   </head>
   <body>
     <a class="skip-link" href="#contenido">Ir al contenido</a>
 
+    <!-- Preloader -->
+    <div class="preloader" id="preloader" aria-hidden="true">
+      <div class="preloader-logo-wrap">
+        <img
+          src="./logo/186a8ebc-c0ea-4413-b7e1-fc481131ea17.jpg"
+          alt=""
+          class="preloader-logo-img"
+        />
+      </div>
+      <p class="preloader-tagline">Diseñamos para conectar</p>
+      <div class="preloader-dots">
+        <span class="preloader-dot"></span>
+        <span class="preloader-dot"></span>
+        <span class="preloader-dot"></span>
+        <span class="preloader-dot"></span>
+        <span class="preloader-dot"></span>
+      </div>
+    </div>
+
     <div class="cursor-dot" aria-hidden="true"></div>
     <div class="cursor-ring" aria-hidden="true"></div>
 
-    <header class="site-header">
-      <a class="brand" href="#inicio" aria-label="HAZTHINK, volver al inicio">
-        <svg class="brand-mark" viewBox="0 0 100 92" aria-hidden="true">
-          <path d="M50 8c4 8 5 16 3 24" class="petal petal-top" />
-          <path d="M50 32C38 20 24 16 12 18c2 14 10 24 22 28" class="petal petal-green" />
-          <path d="M50 32c12-12 26-16 38-14-2 14-10 24-22 28" class="petal petal-orange" />
-          <path
-            d="M50 32c-20 2-34 14-40 30 12 10 28 12 40 4 12 8 28 6 40-4-6-16-20-28-40-30Z"
-            class="petal petal-base"
-          />
-          <path d="M50 40c-6 4-9 11-9 20 0 8 3 15 9 20 6-5 9-12 9-20 0-9-3-16-9-20Z" class="petal petal-core" />
-        </svg>
-        Haz<span>Think</span>
+    <header class="site-header" id="siteHeader">
+      <a class="brand" href="/" aria-label="HAZTHINK, volver al inicio">
+        <img
+          src="./logo/186a8ebc-c0ea-4413-b7e1-fc481131ea17.jpg"
+          alt="HAZTHINK"
+          class="brand-logo-img"
+          width="148"
+          height="44"
+        />
       </a>
 
       <nav class="main-nav" aria-label="Navegación principal" id="main-nav">
-        <a href="#servicios">Servicios</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#contacto">Contacto</a>
+        <a href="/" class="nav-current">Inicio</a>
+        <a href="/nosotros">Nosotros</a>
+        <a href="/proyectos">Proyectos</a>
+        <a href="/contacto">Contacto</a>
       </nav>
 
       <div class="header-actions">
@@ -62,74 +75,77 @@
     </header>
 
     <main id="contenido">
-      <section class="hero" id="inicio" aria-labelledby="hero-title">
-        <div class="hero-inner">
-          <div class="hero-copy">
-            <p class="eyebrow hero-eyebrow"><span></span>Diseño · Impresión · Publicidad</p>
 
-            <h1 id="hero-title" class="hero-title">
-              <span class="line" data-line>Diseñamos para conectar,</span>
-              <span class="line" data-line>imprimimos para compartir,</span>
-              <span class="line line-accent" data-line>publicamos para convencer.</span>
-            </h1>
+      <!-- HERO — dark section -->
+      <div class="hero-dark-section" id="heroDarkSection">
+        <section class="hero" id="inicio" aria-labelledby="hero-title">
+          <div class="hero-inner">
+            <div class="hero-copy">
+              <img
+                src="./logo/186a8ebc-c0ea-4413-b7e1-fc481131ea17.jpg"
+                alt="HAZTHINK"
+                class="hero-logo"
+              />
+              <p class="eyebrow hero-eyebrow"><span></span>Diseño · Impresión · Publicidad</p>
 
-            <p class="hero-lead reveal">
-              HAZTHINK es el estudio que convierte tus ideas en redes sociales, lonas, identidad y
-              publicidad que sí se notan.
-            </p>
+              <h1 id="hero-title" class="hero-title">
+                <span class="line" data-line>Diseñamos para conectar,</span>
+                <span class="line" data-line>imprimimos para compartir,</span>
+                <span class="line line-accent" data-line>publicamos para convencer.</span>
+              </h1>
 
-            <div class="hero-actions reveal">
-              <a
-                class="button button-primary"
-                href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20cotizar%20un%20proyecto."
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Cotiza por WhatsApp
-              </a>
-              <a class="button button-quiet" href="#servicios">Ver servicios</a>
+              <p class="hero-lead">
+                HAZTHINK es el estudio que convierte tus ideas en redes sociales, lonas, identidad y publicidad que sí se notan.
+              </p>
+
+              <div class="hero-actions">
+                <a
+                  class="button button-primary"
+                  href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20cotizar%20un%20proyecto."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Cotiza por WhatsApp
+                </a>
+                <a class="button button-quiet" href="#servicios">Ver servicios</a>
+              </div>
             </div>
-          </div>
 
-          <div class="hero-stage" aria-hidden="true">
-            <div class="stage-tilt tilt">
-              <div class="mock mock-post">
-                <div class="mock-post-head">
-                  <span class="mock-avatar"></span>
-                  <span class="mock-lines"><i></i><i></i></span>
+            <div class="hero-stage" aria-hidden="true">
+              <div class="stage-tilt tilt">
+                <div class="mock mock-post">
+                  <div class="mock-post-head">
+                    <span class="mock-avatar"></span>
+                    <span class="mock-lines"><i></i><i></i></span>
+                  </div>
+                  <div class="mock-post-media"></div>
+                  <div class="mock-post-actions"><i></i><i></i><i></i></div>
                 </div>
-                <div class="mock-post-media"></div>
-                <div class="mock-post-actions"><i></i><i></i><i></i></div>
-              </div>
 
-              <div class="mock mock-brand">
-                <svg class="mock-brand-mark" viewBox="0 0 100 92" aria-hidden="true">
-                  <path d="M50 8c4 8 5 16 3 24" class="petal petal-top" />
-                  <path d="M50 32C38 20 24 16 12 18c2 14 10 24 22 28" class="petal petal-green" />
-                  <path d="M50 32c12-12 26-16 38-14-2 14-10 24-22 28" class="petal petal-orange" />
-                  <path
-                    d="M50 32c-20 2-34 14-40 30 12 10 28 12 40 4 12 8 28 6 40-4-6-16-20-28-40-30Z"
-                    class="petal petal-base"
+                <div class="mock mock-brand">
+                  <img
+                    src="./logo/186a8ebc-c0ea-4413-b7e1-fc481131ea17.jpg"
+                    alt=""
+                    style="width:52px;border-radius:8px;"
                   />
-                  <path d="M50 40c-6 4-9 11-9 20 0 8 3 15 9 20 6-5 9-12 9-20 0-9-3-16-9-20Z" class="petal petal-core" />
-                </svg>
-                <span>HAZTHINK</span>
-              </div>
+                </div>
 
-              <div class="mock mock-banner">
-                <span class="mock-banner-tag">Lona 3×2 m</span>
-                <span class="mock-banner-line"></span>
-                <span class="mock-banner-line short"></span>
+                <div class="mock mock-banner">
+                  <span class="mock-banner-tag">Lona 3×2 m</span>
+                  <span class="mock-banner-line"></span>
+                  <span class="mock-banner-line short"></span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="scroll-note reveal" aria-hidden="true">
-          <span class="scroll-note-dot"></span>Desliza para ver más
-        </div>
-      </section>
+          <div class="scroll-note" aria-hidden="true">
+            <span class="scroll-note-dot"></span>Desliza para ver más
+          </div>
+        </section>
+      </div>
 
+      <!-- MARQUEE -->
       <div class="marquee" aria-hidden="true">
         <div class="marquee-track">
           <span>Redes Sociales</span><span class="dot">✦</span>
@@ -145,6 +161,7 @@
         </div>
       </div>
 
+      <!-- SERVICES -->
       <section class="section services" id="servicios" aria-labelledby="services-title">
         <div class="section-heading reveal">
           <p class="eyebrow"><span></span>Servicios</p>
@@ -195,8 +212,7 @@
             <span class="service-icon">
               <svg aria-hidden="true" viewBox="0 0 24 24">
                 <path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"></path>
-                <path d="M17 9a4 4 0 0 1 0 6"></path>
-                <path d="M20 6a8 8 0 0 1 0 12"></path>
+                <path d="M17 9a4 4 0 0 1 0 6M20 6a8 8 0 0 1 0 12"></path>
               </svg>
             </span>
             <span class="service-index">04</span>
@@ -231,6 +247,7 @@
         </div>
       </section>
 
+      <!-- NOSOTROS TEASER -->
       <section class="section about" id="nosotros" aria-labelledby="about-title">
         <div class="about-grid">
           <div class="about-copy reveal">
@@ -242,6 +259,7 @@
               En HAZTHINK unimos diseño, impresión y publicidad para que no tengas que ir con tres
               proveedores distintos. Una sola conversación, una sola marca, un solo resultado.
             </p>
+            <a class="button button-quiet" href="/nosotros" style="margin-top:1.5rem">Conoce más de nosotros</a>
           </div>
 
           <ul class="value-list">
@@ -261,6 +279,7 @@
         </div>
       </section>
 
+      <!-- PROYECTOS TEASER -->
       <section class="section projects" id="proyectos" aria-labelledby="projects-title">
         <div class="section-heading reveal">
           <p class="eyebrow"><span></span>Proyectos</p>
@@ -304,16 +323,7 @@
           <article class="stack-card" style="--i: 2; --accent: var(--c-brand)">
             <div class="stack-card-mock">
               <div class="mock mock-brand mock-brand-sm">
-                <svg class="mock-brand-mark" viewBox="0 0 100 92" aria-hidden="true">
-                  <path d="M50 8c4 8 5 16 3 24" class="petal petal-top" />
-                  <path d="M50 32C38 20 24 16 12 18c2 14 10 24 22 28" class="petal petal-green" />
-                  <path d="M50 32c12-12 26-16 38-14-2 14-10 24-22 28" class="petal petal-orange" />
-                  <path
-                    d="M50 32c-20 2-34 14-40 30 12 10 28 12 40 4 12 8 28 6 40-4-6-16-20-28-40-30Z"
-                    class="petal petal-base"
-                  />
-                  <path d="M50 40c-6 4-9 11-9 20 0 8 3 15 9 20 6-5 9-12 9-20 0-9-3-16-9-20Z" class="petal petal-core" />
-                </svg>
+                <img src="./logo/186a8ebc-c0ea-4413-b7e1-fc481131ea17.jpg" alt="" style="width:46px;border-radius:6px;" />
               </div>
             </div>
             <div class="stack-card-inner">
@@ -322,44 +332,14 @@
               <p>Logotipo, paleta y aplicaciones para un negocio que apenas empezaba.</p>
             </div>
           </article>
-
-          <article class="stack-card" style="--i: 3; --accent: var(--c-ads)">
-            <div class="stack-card-mock">
-              <div class="mock mock-banner mock-banner-sm mock-banner-ads">
-                <span class="mock-banner-tag">Promo de temporada</span>
-                <span class="mock-banner-line"></span>
-                <span class="mock-banner-line short"></span>
-              </div>
-            </div>
-            <div class="stack-card-inner">
-              <span class="stack-tag">Publicidad · Ejemplo</span>
-              <h3>Piezas de temporada para punto de venta</h3>
-              <p>Promocionales impresos y digitales pensados para impulsar ventas.</p>
-            </div>
-          </article>
-
-          <article class="stack-card" style="--i: 4; --accent: var(--c-invite)">
-            <div class="stack-card-mock">
-              <div class="mock mock-invite">
-                <span class="mock-invite-line"></span>
-                <span class="mock-invite-line short"></span>
-                <span class="mock-invite-seal"></span>
-              </div>
-            </div>
-            <div class="stack-card-inner">
-              <span class="stack-tag">Invitaciones · Ejemplo</span>
-              <h3>Invitación digital e impresa para boda</h3>
-              <p>Diseño coordinado para invitación digital, impresa y papelería del evento.</p>
-            </div>
-          </article>
         </div>
 
-        <p class="projects-note reveal">
-          Ejemplos ilustrativos del tipo de trabajo que hacemos — cuéntanos tu proyecto y lo sumamos
-          a la lista.
-        </p>
+        <div class="reveal" style="margin-top:2.5rem;text-align:center">
+          <a class="button button-quiet" href="/proyectos">Ver todos los proyectos</a>
+        </div>
       </section>
 
+      <!-- CONTACTO CTA -->
       <section class="section contact" id="contacto" aria-labelledby="contact-title">
         <div class="contact-inner reveal">
           <p class="eyebrow"><span></span>Contacto</p>
@@ -367,7 +347,12 @@
           <p>Escríbenos y cuéntanos qué necesitas. Respondemos rápido.</p>
 
           <div class="contact-grid">
-            <a class="contact-item tilt" href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20cotizar%20un%20proyecto." target="_blank" rel="noopener noreferrer">
+            <a
+              class="contact-item tilt"
+              href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20cotizar%20un%20proyecto."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <span>Teléfono / WhatsApp</span>
               <strong>(729) 455 0094</strong>
             </a>
@@ -375,7 +360,12 @@
               <span>Correo</span>
               <strong>hazthink@gmail.com</strong>
             </a>
-            <a class="contact-item tilt" href="https://www.facebook.com/share/18rEFEuTZb/" target="_blank" rel="noopener noreferrer">
+            <a
+              class="contact-item tilt"
+              href="https://www.facebook.com/share/18rEFEuTZb/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <span>Facebook</span>
               <strong>/HAZTHINK</strong>
             </a>
@@ -394,13 +384,61 @@
     </main>
 
     <footer class="site-footer">
-      <div class="footer-brand">Haz<span>Think</span></div>
+      <img src="./logo/186a8ebc-c0ea-4413-b7e1-fc481131ea17.jpg" alt="HAZTHINK" class="footer-logo-img" />
       <p>Diseñamos para conectar, imprimimos para compartir, publicamos para convencer.</p>
+      <div class="footer-links">
+        <a href="/terminos">Términos y Condiciones</a>
+        <a href="/privacidad">Política de Privacidad</a>
+      </div>
       <div class="footer-meta">
-        <span>© <span id="year"></span> HAZTHINK</span>
-        <span>Sitio por BryanF Design</span>
+        <span>© <span class="year"></span> HAZTHINK</span>
+        <span>Sitio por <a href="https://www.bryanfdesign.com.mx" target="_blank" rel="noopener">BryanF Design</a></span>
       </div>
     </footer>
+
+    <!-- WhatsApp float -->
+    <a
+      class="wa-float"
+      href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20cotizar%20un%20proyecto."
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Escríbenos por WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      </svg>
+    </a>
+
+    <!-- Mobile app-style bottom tab bar -->
+    <nav class="mobile-tabbar" aria-label="Navegación móvil">
+      <a href="/" class="tab" data-tab="/">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"/><path d="M9 21v-6h6v6"/></svg>
+        <span>Inicio</span>
+      </a>
+      <a href="/nosotros" class="tab" data-tab="/nosotros">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.4 3-5.2 6.5-5.2s6.5 1.8 6.5 5.2"/><path d="M16.5 5.8a3 3 0 0 1 0 5.8"/><path d="M18.5 14.6c2.4.5 3.9 2 3.9 5.4"/></svg>
+        <span>Nosotros</span>
+      </a>
+      <a
+        href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20cotizar%20un%20proyecto."
+        class="tab tab-wa"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Escríbenos por WhatsApp"
+      >
+        <span class="tab-wa-circle">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </span>
+      </a>
+      <a href="/proyectos" class="tab" data-tab="/proyectos">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/></svg>
+        <span>Proyectos</span>
+      </a>
+      <a href="/contacto" class="tab" data-tab="/contacto">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 0 1-.9-3.8A8.38 8.38 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg>
+        <span>Contacto</span>
+      </a>
+    </nav>
 
     <script src="./assets/js/anime.min.js"></script>
     <script src="./app.js"></script>
