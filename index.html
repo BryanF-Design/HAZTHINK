@@ -7,48 +7,28 @@
       name="description"
       content="HAZTHINK — estudio de diseño, impresión y publicidad en México. Redes sociales, lonas, identidad corporativa, publicidad e invitaciones."
     />
-    <meta name="theme-color" content="#fff5f9" />
-    <title>HAZTHINK — Diseñamos para conectar</title>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23FF2D78'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='36' font-weight='700' fill='white' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E"
-    />
+    <meta name="theme-color" content="#08131f" />
+    <title>HAZTHINK — Ideas que se ven</title>
+    <link rel="icon" type="image/png" href="./assets/hazthink-favicon.png" />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./experience.css" />
     <script>document.documentElement.classList.add("js");</script>
   </head>
-  <body>
+
+  <body class="home-page">
     <a class="skip-link" href="#contenido">Ir al contenido</a>
-
-    <!-- Preloader -->
-    <div class="preloader" id="preloader" aria-hidden="true">
-      <div class="preloader-logo-wrap">
-        <img
-          src="./logo/186a8ebc-c0ea-4413-b7e1-fc481131ea17.jpg"
-          alt=""
-          class="preloader-logo-img"
-        />
-      </div>
-      <p class="preloader-tagline">Diseñamos para conectar</p>
-      <div class="preloader-dots">
-        <span class="preloader-dot"></span>
-        <span class="preloader-dot"></span>
-        <span class="preloader-dot"></span>
-        <span class="preloader-dot"></span>
-        <span class="preloader-dot"></span>
-      </div>
-    </div>
-
+    <div class="scroll-meter" aria-hidden="true"><span></span></div>
     <div class="cursor-dot" aria-hidden="true"></div>
-    <div class="cursor-ring" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"><span>Ver</span></div>
 
     <header class="site-header" id="siteHeader">
       <a class="brand" href="/" aria-label="HAZTHINK, volver al inicio">
         <img
-          src="./logo/186a8ebc-c0ea-4413-b7e1-fc481131ea17.jpg"
+          src="./assets/hazthink-logo-transparent.png"
           alt="HAZTHINK"
           class="brand-logo-img"
-          width="148"
-          height="44"
+          width="180"
+          height="154"
         />
       </a>
 
@@ -61,12 +41,12 @@
 
       <div class="header-actions">
         <a
-          class="button button-primary button-small"
+          class="button button-primary button-small magnetic"
           href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20cotizar%20un%20proyecto."
           target="_blank"
           rel="noopener noreferrer"
         >
-          Cotiza ya
+          Cotiza tu idea <span aria-hidden="true">↗</span>
         </a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú">
           <span></span><span></span><span></span>
@@ -75,316 +55,332 @@
     </header>
 
     <main id="contenido">
-
-      <!-- HERO — dark section -->
       <div class="hero-dark-section" id="heroDarkSection">
         <section class="hero" id="inicio" aria-labelledby="hero-title">
+          <div class="hero-grid-lines" aria-hidden="true"></div>
+          <span class="hero-orbit hero-orbit-one" aria-hidden="true"></span>
+          <span class="hero-orbit hero-orbit-two" aria-hidden="true"></span>
+
           <div class="hero-inner">
             <div class="hero-copy">
               <img
-                src="./logo/186a8ebc-c0ea-4413-b7e1-fc481131ea17.jpg"
+                src="./assets/hazthink-logo-transparent.png"
                 alt="HAZTHINK"
                 class="hero-logo"
+                width="310"
+                height="265"
               />
+
               <p class="eyebrow hero-eyebrow"><span></span>Diseño · Impresión · Publicidad</p>
 
               <h1 id="hero-title" class="hero-title">
-                <span class="line" data-line>Diseñamos para conectar,</span>
-                <span class="line" data-line>imprimimos para compartir,</span>
-                <span class="line line-accent" data-line>publicamos para convencer.</span>
+                <span class="line" data-line>Ideas que se ven.</span>
+                <span class="line" data-line>Marcas que se</span>
+                <span class="line line-accent" data-line>mueven.</span>
               </h1>
 
               <p class="hero-lead">
-                HAZTHINK es el estudio que convierte tus ideas en redes sociales, lonas, identidad y publicidad que sí se notan.
+                Convertimos lo que tienes en mente en una identidad que la gente puede ver,
+                tocar, compartir y recordar.
               </p>
 
               <div class="hero-actions">
                 <a
-                  class="button button-primary"
+                  class="button button-primary magnetic"
                   href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20cotizar%20un%20proyecto."
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Cotiza por WhatsApp
+                  Cuéntanos tu idea <span aria-hidden="true">↗</span>
                 </a>
-                <a class="button button-quiet" href="#servicios">Ver servicios</a>
+                <a class="button button-quiet" href="#servicios">Explorar servicios</a>
+              </div>
+
+              <div class="hero-signals" aria-label="Forma de trabajo">
+                <span>Un solo estudio</span>
+                <span>Digital + impreso</span>
+                <span>Hecho a tu medida</span>
               </div>
             </div>
 
-            <div class="hero-stage" aria-hidden="true">
-              <div class="stage-tilt tilt">
-                <div class="mock mock-post">
-                  <div class="mock-post-head">
-                    <span class="mock-avatar"></span>
-                    <span class="mock-lines"><i></i><i></i></span>
-                  </div>
-                  <div class="mock-post-media"></div>
-                  <div class="mock-post-actions"><i></i><i></i><i></i></div>
-                </div>
-
-                <div class="mock mock-brand">
-                  <img
-                    src="./logo/186a8ebc-c0ea-4413-b7e1-fc481131ea17.jpg"
-                    alt=""
-                    style="width:52px;border-radius:8px;"
-                  />
-                </div>
-
-                <div class="mock mock-banner">
-                  <span class="mock-banner-tag">Lona 3×2 m</span>
-                  <span class="mock-banner-line"></span>
-                  <span class="mock-banner-line short"></span>
-                </div>
+            <div class="hero-visual reveal" data-cursor="Explora">
+              <div class="bloom-shell" id="bloomShell">
+                <canvas
+                  id="brandBloom"
+                  aria-label="Loto tridimensional interactivo de HAZTHINK. Arrastra, toca o mantén presionado para moverlo."
+                  role="img"
+                ></canvas>
+                <img
+                  class="bloom-fallback"
+                  src="./assets/hazthink-logo-transparent.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <div class="bloom-reticle" aria-hidden="true"><span></span><span></span></div>
+                <button class="bloom-hold" id="bloomHold" type="button" aria-pressed="false">
+                  <span class="bloom-hold-ring" aria-hidden="true"></span>
+                  <span class="bloom-hold-copy">
+                    <strong>Mantén</strong>
+                    <small>para abrir el color</small>
+                  </span>
+                </button>
+                <div class="bloom-status" aria-live="polite">Color en reposo</div>
               </div>
+              <p class="bloom-caption"><span>Color Bloom / 01</span> Una identidad viva, no un adorno.</p>
             </div>
           </div>
 
-          <div class="scroll-note" aria-hidden="true">
-            <span class="scroll-note-dot"></span>Desliza para ver más
-          </div>
+          <a class="scroll-note" href="#manifiesto">
+            <span class="scroll-note-dot" aria-hidden="true"></span>
+            Desliza para activar la experiencia
+          </a>
         </section>
       </div>
 
-      <!-- MARQUEE -->
-      <div class="marquee" aria-hidden="true">
+      <div class="marquee" aria-label="Servicios HAZTHINK">
         <div class="marquee-track">
-          <span>Redes Sociales</span><span class="dot">✦</span>
-          <span>Impresión de Lonas</span><span class="dot">✦</span>
-          <span>Identidad Corporativa</span><span class="dot">✦</span>
+          <span>Redes sociales</span><span class="dot">✦</span>
+          <span>Impresión de lonas</span><span class="dot">✦</span>
+          <span>Identidad corporativa</span><span class="dot">✦</span>
           <span>Publicidad</span><span class="dot">✦</span>
           <span>Invitaciones</span><span class="dot">✦</span>
-          <span>Redes Sociales</span><span class="dot">✦</span>
-          <span>Impresión de Lonas</span><span class="dot">✦</span>
-          <span>Identidad Corporativa</span><span class="dot">✦</span>
-          <span>Publicidad</span><span class="dot">✦</span>
-          <span>Invitaciones</span><span class="dot">✦</span>
+          <span aria-hidden="true">Redes sociales</span><span class="dot" aria-hidden="true">✦</span>
+          <span aria-hidden="true">Impresión de lonas</span><span class="dot" aria-hidden="true">✦</span>
+          <span aria-hidden="true">Identidad corporativa</span><span class="dot" aria-hidden="true">✦</span>
+          <span aria-hidden="true">Publicidad</span><span class="dot" aria-hidden="true">✦</span>
+          <span aria-hidden="true">Invitaciones</span><span class="dot" aria-hidden="true">✦</span>
         </div>
       </div>
 
-      <!-- SERVICES -->
-      <section class="section services" id="servicios" aria-labelledby="services-title">
+      <section class="identity-shift" id="manifiesto" aria-labelledby="manifesto-title">
+        <div class="identity-shift-aside reveal">
+          <p class="eyebrow"><span></span>Lo que hacemos</p>
+          <p>No decoramos negocios. Les damos una forma clara de hacerse notar.</p>
+        </div>
+        <div class="identity-shift-copy">
+          <h2 id="manifesto-title" class="kinetic-copy">
+            <span class="reveal">Tu idea</span>
+            <span class="reveal outline-text">se piensa,</span>
+            <span class="reveal color-word">se diseña,</span>
+            <span class="reveal">se imprime</span>
+            <span class="reveal outline-text">y se comparte.</span>
+          </h2>
+        </div>
+        <div class="color-ruler" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </section>
+
+      <section class="section services experience-services" id="servicios" aria-labelledby="services-title">
         <div class="section-heading reveal">
           <p class="eyebrow"><span></span>Servicios</p>
-          <h2 id="services-title">Todo lo que tu marca necesita, en un mismo lugar.</h2>
-          <p>Cinco frentes de trabajo, cada uno con su propio color y su propio criterio.</p>
+          <h2 id="services-title">Una idea. Cinco formas de ponerla en el mundo.</h2>
+          <p>Toca una tarjeta para ver lo que podemos construir contigo.</p>
         </div>
 
-        <div class="service-grid">
-          <article class="service-card tilt reveal" style="--accent: var(--c-social)">
-            <span class="service-icon">
-              <svg aria-hidden="true" viewBox="0 0 24 24">
-                <circle cx="6" cy="12" r="2.6"></circle>
-                <circle cx="18" cy="6" r="2.6"></circle>
-                <circle cx="18" cy="18" r="2.6"></circle>
-                <path d="M8.3 10.8 15.7 7.2M8.3 13.2 15.7 16.8"></path>
-              </svg>
-            </span>
-            <span class="service-index">01</span>
-            <h3>Redes Sociales</h3>
-            <p>Contenido y gestión que mantienen tu marca activa y conectada con tu comunidad.</p>
+        <div class="service-grid interactive-service-grid">
+          <article class="service-card reveal" style="--accent: var(--c-social)" data-interactive-card data-cursor="Abrir">
+            <button class="service-toggle" type="button" aria-expanded="false">
+              <span class="service-medium">Digital</span>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.6"></circle><circle cx="18" cy="6" r="2.6"></circle><circle cx="18" cy="18" r="2.6"></circle><path d="M8.3 10.8 15.7 7.2M8.3 13.2 15.7 16.8"></path></svg>
+              </span>
+              <span class="service-title" role="heading" aria-level="3">Redes sociales</span>
+              <span class="service-description">Contenido visual que hace que tu marca se reconozca incluso antes de leer su nombre.</span>
+              <span class="service-open-label"><span>Ver entregables</span><i aria-hidden="true"></i></span>
+            </button>
+            <div class="service-more">
+              <ul><li>Diseño para feed e historias</li><li>Plantillas para tu comunicación</li><li>Dirección visual consistente</li></ul>
+              <a href="/contacto">Quiero trabajar esto <span aria-hidden="true">↗</span></a>
+            </div>
           </article>
 
-          <article class="service-card tilt reveal" style="--accent: var(--c-print)">
-            <span class="service-icon">
-              <svg aria-hidden="true" viewBox="0 0 24 24">
-                <rect x="3" y="4" width="18" height="12" rx="1.5"></rect>
-                <path d="M7 20h10M9 16v4M15 16v4"></path>
-              </svg>
-            </span>
-            <span class="service-index">02</span>
-            <h3>Impresión de Lonas</h3>
-            <p>Gran formato con acabado profesional para eventos, negocios y promociones.</p>
+          <article class="service-card reveal" style="--accent: var(--c-print)" data-interactive-card data-cursor="Abrir">
+            <button class="service-toggle" type="button" aria-expanded="false">
+              <span class="service-medium">Gran formato</span>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1.5"></rect><path d="M7 20h10M9 16v4M15 16v4"></path></svg>
+              </span>
+              <span class="service-title" role="heading" aria-level="3">Impresión de lonas</span>
+              <span class="service-description">Piezas de gran formato que conservan legibilidad, color y presencia a distancia.</span>
+              <span class="service-open-label"><span>Ver entregables</span><i aria-hidden="true"></i></span>
+            </button>
+            <div class="service-more">
+              <ul><li>Diseño adaptado al formato</li><li>Preparación para impresión</li><li>Producción para eventos y negocios</li></ul>
+              <a href="/contacto">Quiero trabajar esto <span aria-hidden="true">↗</span></a>
+            </div>
           </article>
 
-          <article class="service-card tilt reveal" style="--accent: var(--c-brand)">
-            <span class="service-icon">
-              <svg aria-hidden="true" viewBox="0 0 24 24">
-                <path d="M12 3 4 7v6c0 4.2 3.4 7.4 8 8 4.6-.6 8-3.8 8-8V7z"></path>
-                <path d="m9 12 2 2 4-4"></path>
-              </svg>
-            </span>
-            <span class="service-index">03</span>
-            <h3>Identidad Corporativa y Logos</h3>
-            <p>Logotipos y sistemas de marca que hacen que te reconozcan a la primera.</p>
+          <article class="service-card reveal" style="--accent: var(--c-brand)" data-interactive-card data-cursor="Abrir">
+            <button class="service-toggle" type="button" aria-expanded="false">
+              <span class="service-medium">Marca</span>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3 4 7v6c0 4.2 3.4 7.4 8 8 4.6-.6 8-3.8 8-8V7z"></path><path d="m9 12 2 2 4-4"></path></svg>
+              </span>
+              <span class="service-title" role="heading" aria-level="3">Identidad y logotipos</span>
+              <span class="service-description">Una identidad flexible para que tu negocio se vea como el mismo negocio en todas partes.</span>
+              <span class="service-open-label"><span>Ver entregables</span><i aria-hidden="true"></i></span>
+            </button>
+            <div class="service-more">
+              <ul><li>Logotipo y versiones de uso</li><li>Paleta y tipografías</li><li>Aplicaciones esenciales de marca</li></ul>
+              <a href="/contacto">Quiero trabajar esto <span aria-hidden="true">↗</span></a>
+            </div>
           </article>
 
-          <article class="service-card tilt reveal" style="--accent: var(--c-ads)">
-            <span class="service-icon">
-              <svg aria-hidden="true" viewBox="0 0 24 24">
-                <path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"></path>
-                <path d="M17 9a4 4 0 0 1 0 6M20 6a8 8 0 0 1 0 12"></path>
-              </svg>
-            </span>
-            <span class="service-index">04</span>
-            <h3>Publicidad</h3>
-            <p>Piezas publicitarias pensadas para vender, no solo para verse bonitas.</p>
+          <article class="service-card reveal" style="--accent: var(--c-ads)" data-interactive-card data-cursor="Abrir">
+            <button class="service-toggle" type="button" aria-expanded="false">
+              <span class="service-medium">Campaña</span>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"></path><path d="M17 9a4 4 0 0 1 0 6M20 6a8 8 0 0 1 0 12"></path></svg>
+              </span>
+              <span class="service-title" role="heading" aria-level="3">Publicidad</span>
+              <span class="service-description">Mensajes visuales con una idea central clara y una acción concreta para tu audiencia.</span>
+              <span class="service-open-label"><span>Ver entregables</span><i aria-hidden="true"></i></span>
+            </button>
+            <div class="service-more">
+              <ul><li>Concepto visual de campaña</li><li>Piezas digitales e impresas</li><li>Adaptaciones por formato</li></ul>
+              <a href="/contacto">Quiero trabajar esto <span aria-hidden="true">↗</span></a>
+            </div>
           </article>
 
-          <article class="service-card tilt reveal" style="--accent: var(--c-invite)">
-            <span class="service-icon">
-              <svg aria-hidden="true" viewBox="0 0 24 24">
-                <rect x="3" y="5" width="18" height="14" rx="2"></rect>
-                <path d="m4 7 8 6 8-6"></path>
-              </svg>
-            </span>
-            <span class="service-index">05</span>
-            <h3>Invitaciones Digitales e Impresas</h3>
-            <p>Para bodas, XV años y eventos: en digital, impresas, o ambas.</p>
+          <article class="service-card reveal" style="--accent: var(--c-invite)" data-interactive-card data-cursor="Abrir">
+            <button class="service-toggle" type="button" aria-expanded="false">
+              <span class="service-medium">Evento</span>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path></svg>
+              </span>
+              <span class="service-title" role="heading" aria-level="3">Invitaciones</span>
+              <span class="service-description">Invitaciones digitales o impresas que abren la experiencia antes de que empiece el evento.</span>
+              <span class="service-open-label"><span>Ver entregables</span><i aria-hidden="true"></i></span>
+            </button>
+            <div class="service-more">
+              <ul><li>Concepto acorde al evento</li><li>Versión digital e impresa</li><li>Información clara y lista para compartir</li></ul>
+              <a href="/contacto">Quiero trabajar esto <span aria-hidden="true">↗</span></a>
+            </div>
           </article>
 
-          <article class="service-card service-card-cta reveal">
-            <h3>¿No ves tu proyecto aquí?</h3>
-            <p>Cuéntanos qué necesitas y lo armamos juntos.</p>
+          <article class="service-card service-card-cta reveal" data-cursor="Cotizar">
+            <div>
+              <span class="service-medium">Tu proyecto</span>
+              <h3>¿Necesitas una mezcla diferente?</h3>
+              <p>Cuéntanos qué quieres lograr. Armamos la combinación contigo.</p>
+            </div>
             <a
-              class="button button-primary button-small"
-              href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20cotizar%20un%20proyecto."
+              class="button button-primary magnetic"
+              href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20tengo%20una%20idea%20diferente%20y%20quiero%20cotizarla."
               target="_blank"
               rel="noopener noreferrer"
             >
-              Escríbenos
+              Abrir conversación <span aria-hidden="true">↗</span>
             </a>
           </article>
         </div>
       </section>
 
-      <!-- NOSOTROS TEASER -->
-      <section class="section about" id="nosotros" aria-labelledby="about-title">
-        <div class="about-grid">
-          <div class="about-copy reveal">
-            <p class="eyebrow"><span></span>Nosotros</p>
-            <h2 id="about-title">
-              Detrás de cada proyecto hay una idea que <em>sí</em> funciona.
-            </h2>
-            <p>
-              En HAZTHINK unimos diseño, impresión y publicidad para que no tengas que ir con tres
-              proveedores distintos. Una sola conversación, una sola marca, un solo resultado.
-            </p>
-            <a class="button button-quiet" href="/nosotros" style="margin-top:1.5rem">Conoce más de nosotros</a>
-          </div>
+      <section class="process-lab" aria-labelledby="process-title">
+        <div class="process-heading reveal">
+          <p class="eyebrow"><span></span>Cómo trabajamos</p>
+          <h2 id="process-title">Del mensaje al mundo, sin perder la idea.</h2>
+          <p>Un proceso simple para que cada decisión tenga una razón.</p>
+        </div>
 
-          <ul class="value-list">
-            <li class="value-item reveal" style="--accent: var(--c-social)">
-              <strong>Diseño a tu medida</strong>
-              <p>Nada de plantillas genéricas: cada pieza se hace para tu marca.</p>
-            </li>
-            <li class="value-item reveal" style="--accent: var(--c-print)">
-              <strong>Entregas puntuales</strong>
-              <p>Tiempos claros desde el primer mensaje, sin sorpresas.</p>
-            </li>
-            <li class="value-item reveal" style="--accent: var(--c-invite)">
-              <strong>Todo en un solo lugar</strong>
-              <p>De la idea al diseño, y del diseño al impreso o publicado.</p>
-            </li>
-          </ul>
+        <div class="process-track">
+          <article class="process-step reveal" style="--step-color: var(--c-social)">
+            <span class="process-index">01 / Escuchar</span>
+            <h3>Primero entendemos qué debe pasar.</h3>
+            <p>Nos cuentas el objetivo, el contexto y dónde va a vivir la pieza.</p>
+            <div class="process-glyph process-glyph-listen" aria-hidden="true"><i></i><i></i><i></i></div>
+          </article>
+          <article class="process-step reveal" style="--step-color: var(--c-print)">
+            <span class="process-index">02 / Diseñar</span>
+            <h3>Convertimos la intención en un sistema visual.</h3>
+            <p>Color, tipografía, composición y formato trabajan para decir lo mismo.</p>
+            <div class="process-glyph process-glyph-design" aria-hidden="true"><i></i><i></i><i></i></div>
+          </article>
+          <article class="process-step reveal" style="--step-color: var(--c-invite)">
+            <span class="process-index">03 / Lanzar</span>
+            <h3>Lo dejamos listo para ver, tocar o compartir.</h3>
+            <p>Preparamos cada aplicación para su medio digital o impreso.</p>
+            <div class="process-glyph process-glyph-launch" aria-hidden="true"><i></i><i></i><i></i></div>
+          </article>
         </div>
       </section>
 
-      <!-- PROYECTOS TEASER -->
-      <section class="section projects" id="proyectos" aria-labelledby="projects-title">
+      <section class="project-gallery" id="proyectos" aria-labelledby="projects-title">
         <div class="section-heading reveal">
-          <p class="eyebrow"><span></span>Proyectos</p>
-          <h2 id="projects-title">Así se ven los proyectos HAZTHINK.</h2>
-          <p>Una muestra del tipo de trabajo que entregamos en cada servicio.</p>
+          <p class="eyebrow"><span></span>Muestras de trabajo</p>
+          <h2 id="projects-title">No hacemos “posts”. Construimos presencia.</h2>
+          <p>Exploraciones del tipo de soluciones que HAZTHINK puede desarrollar.</p>
         </div>
 
-        <div class="stack" id="stack">
-          <article class="stack-card" style="--i: 0; --accent: var(--c-social)">
-            <div class="stack-card-mock">
-              <div class="mock mock-post mock-post-sm">
-                <div class="mock-post-head">
-                  <span class="mock-avatar"></span>
-                  <span class="mock-lines"><i></i><i></i></span>
-                </div>
-                <div class="mock-post-media"></div>
-              </div>
+        <div class="project-gallery-grid">
+          <a class="project-piece project-piece-wide reveal" href="/proyectos" style="--accent: var(--c-social)" data-cursor="Ver">
+            <div class="project-art project-art-social" aria-hidden="true">
+              <span class="art-window"><i></i><i></i><i></i></span>
+              <span class="art-sun"></span>
+              <span class="art-type">CONECTA</span>
             </div>
-            <div class="stack-card-inner">
-              <span class="stack-tag">Redes Sociales · Ejemplo</span>
-              <h3>Campaña de redes para panadería local</h3>
-              <p>Calendario de contenido, artes para feed e historias con identidad consistente.</p>
+            <div class="project-piece-copy">
+              <span>Redes sociales · Muestra conceptual</span>
+              <h3>Una voz visual que sobrevive al scroll.</h3>
+              <p>Dirección visual, sistema de piezas y adaptación por formato.</p>
             </div>
-          </article>
+          </a>
 
-          <article class="stack-card" style="--i: 1; --accent: var(--c-print)">
-            <div class="stack-card-mock">
-              <div class="mock mock-banner mock-banner-sm">
-                <span class="mock-banner-tag">Lona 3×2 m</span>
-                <span class="mock-banner-line"></span>
-                <span class="mock-banner-line short"></span>
-              </div>
+          <a class="project-piece reveal" href="/proyectos" style="--accent: var(--c-print)" data-cursor="Ver">
+            <div class="project-art project-art-print" aria-hidden="true">
+              <span class="print-sheet"><i></i><b>3×2</b><small>metros de presencia</small></span>
             </div>
-            <div class="stack-card-inner">
-              <span class="stack-tag">Impresión de Lonas · Ejemplo</span>
-              <h3>Lona 3×2 m para feria regional</h3>
-              <p>Diseño y producción de gran formato lista para exhibición en exteriores.</p>
+            <div class="project-piece-copy">
+              <span>Gran formato · Muestra conceptual</span>
+              <h3>Diseño que funciona a distancia.</h3>
             </div>
-          </article>
+          </a>
 
-          <article class="stack-card" style="--i: 2; --accent: var(--c-brand)">
-            <div class="stack-card-mock">
-              <div class="mock mock-brand mock-brand-sm">
-                <img src="./logo/186a8ebc-c0ea-4413-b7e1-fc481131ea17.jpg" alt="" style="width:46px;border-radius:6px;" />
-              </div>
+          <a class="project-piece reveal" href="/proyectos" style="--accent: var(--c-brand)" data-cursor="Ver">
+            <div class="project-art project-art-brand" aria-hidden="true">
+              <img src="./assets/hazthink-logo-transparent.png" alt="" />
+              <span class="brand-orbit"></span>
             </div>
-            <div class="stack-card-inner">
-              <span class="stack-tag">Identidad Corporativa · Ejemplo</span>
-              <h3>Sistema de marca para café de especialidad</h3>
-              <p>Logotipo, paleta y aplicaciones para un negocio que apenas empezaba.</p>
+            <div class="project-piece-copy">
+              <span>Identidad · Muestra conceptual</span>
+              <h3>Una marca lista para cambiar de escala.</h3>
             </div>
-          </article>
+          </a>
         </div>
 
-        <div class="reveal" style="margin-top:2.5rem;text-align:center">
-          <a class="button button-quiet" href="/proyectos">Ver todos los proyectos</a>
+        <div class="project-gallery-action reveal">
+          <a class="button button-quiet magnetic" href="/proyectos">Explorar todos los servicios <span aria-hidden="true">↗</span></a>
         </div>
       </section>
 
-      <!-- CONTACTO CTA -->
-      <section class="section contact" id="contacto" aria-labelledby="contact-title">
+      <section class="contact contact-stage" id="contacto" aria-labelledby="contact-title">
+        <img class="contact-watermark" src="./assets/hazthink-logo-transparent.png" alt="" aria-hidden="true" />
         <div class="contact-inner reveal">
-          <p class="eyebrow"><span></span>Contacto</p>
-          <h2 id="contact-title">¿Lo hacemos?</h2>
-          <p>Escríbenos y cuéntanos qué necesitas. Respondemos rápido.</p>
-
-          <div class="contact-grid">
-            <a
-              class="contact-item tilt"
-              href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20cotizar%20un%20proyecto."
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>Teléfono / WhatsApp</span>
-              <strong>(729) 455 0094</strong>
-            </a>
-            <a class="contact-item tilt" href="mailto:hazthink@gmail.com">
-              <span>Correo</span>
-              <strong>hazthink@gmail.com</strong>
-            </a>
-            <a
-              class="contact-item tilt"
-              href="https://www.facebook.com/share/18rEFEuTZb/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>Facebook</span>
-              <strong>/HAZTHINK</strong>
-            </a>
-          </div>
+          <p class="eyebrow"><span></span>Tu turno</p>
+          <h2 id="contact-title">Haz que tu idea<br /><em>exista.</em></h2>
+          <p>Una conversación basta para empezar a darle forma.</p>
 
           <a
-            class="button button-primary"
-            href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20cotizar%20un%20proyecto."
+            class="contact-main-action magnetic"
+            href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20darle%20forma%20a%20mi%20idea."
             target="_blank"
             rel="noopener noreferrer"
           >
-            Cotiza tu proyecto
+            <span>Empezar por WhatsApp</span><i aria-hidden="true">↗</i>
           </a>
+
+          <div class="contact-grid">
+            <a href="tel:+527294550094"><span>Teléfono</span><strong>(729) 455 0094</strong></a>
+            <a href="mailto:hazthink@gmail.com"><span>Correo</span><strong>hazthink@gmail.com</strong></a>
+            <a href="https://www.facebook.com/share/18rEFEuTZb/" target="_blank" rel="noopener noreferrer"><span>Facebook</span><strong>/HAZTHINK</strong></a>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <img src="./logo/186a8ebc-c0ea-4413-b7e1-fc481131ea17.jpg" alt="HAZTHINK" class="footer-logo-img" />
+      <img src="./assets/hazthink-logo-transparent.png" alt="HAZTHINK" class="footer-logo-img" />
       <p>Diseñamos para conectar, imprimimos para compartir, publicamos para convencer.</p>
       <div class="footer-links">
         <a href="/terminos">Términos y Condiciones</a>
@@ -396,7 +392,6 @@
       </div>
     </footer>
 
-    <!-- WhatsApp float -->
     <a
       class="wa-float"
       href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20cotizar%20un%20proyecto."
@@ -404,43 +399,20 @@
       rel="noopener noreferrer"
       aria-label="Escríbenos por WhatsApp"
     >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-      </svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" /></svg>
+      <span>WhatsApp</span>
     </a>
 
-    <!-- Mobile app-style bottom tab bar -->
     <nav class="mobile-tabbar" aria-label="Navegación móvil">
-      <a href="/" class="tab" data-tab="/">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"/><path d="M9 21v-6h6v6"/></svg>
-        <span>Inicio</span>
-      </a>
-      <a href="/nosotros" class="tab" data-tab="/nosotros">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.4 3-5.2 6.5-5.2s6.5 1.8 6.5 5.2"/><path d="M16.5 5.8a3 3 0 0 1 0 5.8"/><path d="M18.5 14.6c2.4.5 3.9 2 3.9 5.4"/></svg>
-        <span>Nosotros</span>
-      </a>
-      <a
-        href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20cotizar%20un%20proyecto."
-        class="tab tab-wa"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Escríbenos por WhatsApp"
-      >
-        <span class="tab-wa-circle">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        </span>
-      </a>
-      <a href="/proyectos" class="tab" data-tab="/proyectos">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/></svg>
-        <span>Proyectos</span>
-      </a>
-      <a href="/contacto" class="tab" data-tab="/contacto">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 0 1-.9-3.8A8.38 8.38 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg>
-        <span>Contacto</span>
-      </a>
+      <a href="/" class="tab" data-tab="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7" /><path d="M5 9v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9" /><path d="M9 21v-6h6v6" /></svg><span>Inicio</span></a>
+      <a href="/nosotros" class="tab" data-tab="/nosotros"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2" /><path d="M2.5 20c0-3.4 3-5.2 6.5-5.2s6.5 1.8 6.5 5.2" /><path d="M16.5 5.8a3 3 0 0 1 0 5.8" /></svg><span>Nosotros</span></a>
+      <a href="https://wa.me/527294550094?text=Hola%20HAZTHINK%2C%20quiero%20cotizar%20un%20proyecto." class="tab tab-wa" target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp"><span class="tab-wa-circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" /></svg></span></a>
+      <a href="/proyectos" class="tab" data-tab="/proyectos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6" /><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6" /><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6" /><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6" /></svg><span>Proyectos</span></a>
+      <a href="/contacto" class="tab" data-tab="/contacto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 0 1-.9-3.8A8.38 8.38 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z" /></svg><span>Contacto</span></a>
     </nav>
 
     <script src="./assets/js/anime.min.js"></script>
     <script src="./app.js"></script>
+    <script type="module" src="./three-experience.js"></script>
   </body>
 </html>

@@ -1,359 +1,376 @@
-/* Mobile nav toggle */
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const supportsFinePointer = window.matchMedia("(pointer: fine)").matches;
+
+/* Preserve the brand colors while turning only near-black ink white on dark surfaces. */
+if (!document.getElementById("hazthink-filter-defs")) {
+  document.body.insertAdjacentHTML("afterbegin", `
+    <svg id="hazthink-filter-defs" aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden">
+      <defs>
+        <filter id="hazthink-logo-on-dark" color-interpolation-filters="sRGB">
+          <feColorMatrix in="SourceGraphic" result="darkness" type="matrix" values="
+            0 0 0 0 1
+            0 0 0 0 1
+            0 0 0 0 1
+            -0.333 -0.333 -0.333 0 1" />
+          <feComposite in="darkness" in2="SourceAlpha" operator="in" result="darkness-clipped" />
+          <feComponentTransfer in="darkness-clipped" result="dark-mask">
+            <feFuncA type="discrete" tableValues="0 0 0 0 1" />
+          </feComponentTransfer>
+          <feFlood flood-color="#ffffff" result="white" />
+          <feComposite in="white" in2="dark-mask" operator="in" result="white-ink" />
+          <feMerge>
+            <feMergeNode in="SourceGraphic" />
+            <feMergeNode in="white-ink" />
+          </feMerge>
+        </filter>
+      </defs>
+    </svg>
+  `);
+}
+
+/* Navigation */
 const navToggle = document.querySelector(".nav-toggle");
 const mainNav = document.getElementById("main-nav");
 
+const closeNavigation = () => {
+  mainNav?.classList.remove("is-open");
+  navToggle?.setAttribute("aria-expanded", "false");
+  navToggle?.setAttribute("aria-label", "Abrir menú");
+};
+
 navToggle?.addEventListener("click", () => {
-  const isOpen = mainNav.classList.toggle("is-open");
+  const isOpen = mainNav?.classList.toggle("is-open") ?? false;
   navToggle.setAttribute("aria-expanded", String(isOpen));
+  navToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
 });
 
-mainNav?.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    mainNav.classList.remove("is-open");
-    navToggle?.setAttribute("aria-expanded", "false");
-  });
+mainNav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeNavigation));
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeNavigation();
 });
 
-/* Footer / copyright year */
-document.querySelectorAll(".year").forEach((el) => {
-  el.textContent = new Date().getFullYear();
+/* Current year */
+document.querySelectorAll(".year").forEach((element) => {
+  element.textContent = new Date().getFullYear();
 });
 
-/* Custom cursor */
+/* Scroll state and page progress */
+const siteHeader = document.getElementById("siteHeader");
+let scrollFramePending = false;
+
+const updateScrollState = () => {
+  const scrollable = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+  const progress = Math.min(Math.max(window.scrollY / scrollable, 0), 1);
+  document.documentElement.style.setProperty("--scroll-progress", progress.toFixed(4));
+  siteHeader?.classList.toggle("is-scrolled", window.scrollY > 24);
+  scrollFramePending = false;
+};
+
+const requestScrollUpdate = () => {
+  if (scrollFramePending) return;
+  scrollFramePending = true;
+  requestAnimationFrame(updateScrollState);
+};
+
+window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+window.addEventListener("resize", requestScrollUpdate);
+updateScrollState();
+
+/* Contextual custom cursor */
 const cursorDot = document.querySelector(".cursor-dot");
 const cursorRing = document.querySelector(".cursor-ring");
-const supportsFinePointer = window.matchMedia("(pointer: fine)").matches;
+const cursorLabel = cursorRing?.querySelector("span");
 
 if (supportsFinePointer && cursorDot && cursorRing) {
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let ringX = mouseX;
-  let ringY = mouseY;
+  let pointerX = window.innerWidth / 2;
+  let pointerY = window.innerHeight / 2;
+  let ringX = pointerX;
+  let ringY = pointerY;
 
-  window.addEventListener("mousemove", (event) => {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
-    cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+  window.addEventListener("pointermove", (event) => {
+    pointerX = event.clientX;
+    pointerY = event.clientY;
+    cursorDot.style.transform = `translate3d(${pointerX}px, ${pointerY}px, 0) translate(-50%, -50%)`;
+  }, { passive: true });
+
+  const renderCursor = () => {
+    ringX += (pointerX - ringX) * 0.16;
+    ringY += (pointerY - ringY) * 0.16;
+    cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+    requestAnimationFrame(renderCursor);
+  };
+  renderCursor();
+
+  const cursorTargets = document.querySelectorAll("a, button, [data-cursor], .slide3d");
+  cursorTargets.forEach((target) => {
+    target.addEventListener("pointerenter", () => {
+      cursorRing.classList.add("is-active");
+      if (cursorLabel) cursorLabel.textContent = target.dataset.cursor || (target.matches("a") ? "Ir" : "Toca");
+    });
+    target.addEventListener("pointerleave", () => cursorRing.classList.remove("is-active"));
   });
 
-  const tick = () => {
-    ringX += (mouseX - ringX) * 0.18;
-    ringY += (mouseY - ringY) * 0.18;
-    cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
-    requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-
-  const hoverTargets = "a, button, .stack-card, .service-card, .contact-item";
-  document.querySelectorAll(hoverTargets).forEach((el) => {
-    el.addEventListener("mouseenter", () => cursorRing.classList.add("is-active"));
-    el.addEventListener("mouseleave", () => cursorRing.classList.remove("is-active"));
+  document.documentElement.addEventListener("mouseleave", () => {
+    cursorDot.style.opacity = "0";
+    cursorRing.style.opacity = "0";
+  });
+  document.documentElement.addEventListener("mouseenter", () => {
+    cursorDot.style.opacity = "1";
+    cursorRing.style.opacity = "1";
   });
 }
 
-/* 3D tilt: cards tilt toward the pointer, the hero stage tilts across the whole hero */
-if (window.matchMedia("(pointer: fine)").matches) {
-  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+/* Magnetic hover — kept deliberately subtle */
+if (supportsFinePointer && !prefersReducedMotion) {
+  document.querySelectorAll(".magnetic").forEach((element) => {
+    element.addEventListener("pointermove", (event) => {
+      const rect = element.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      element.style.transform = `translate3d(${x * 10}px, ${y * 8}px, 0)`;
+    });
+    element.addEventListener("pointerleave", () => {
+      element.style.transform = "";
+    });
+  });
+}
 
-  document.querySelectorAll(".service-card, .contact-item").forEach((card) => {
-    card.addEventListener("mousemove", (event) => {
+/* Pointer tilt on legacy cards across the inner pages */
+if (supportsFinePointer && !prefersReducedMotion) {
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  document.querySelectorAll(".tilt, .contact-method-card, .project-mini-card").forEach((card) => {
+    card.addEventListener("pointermove", (event) => {
       const rect = card.getBoundingClientRect();
       const px = (event.clientX - rect.left) / rect.width - 0.5;
       const py = (event.clientY - rect.top) / rect.height - 0.5;
-      card.style.setProperty("--rx", `${clamp(-py * 14, -10, 10)}deg`);
-      card.style.setProperty("--ry", `${clamp(px * 14, -10, 10)}deg`);
+      card.style.setProperty("--rx", `${clamp(-py * 10, -6, 6)}deg`);
+      card.style.setProperty("--ry", `${clamp(px * 10, -6, 6)}deg`);
     });
-    card.addEventListener("mouseleave", () => {
+    card.addEventListener("pointerleave", () => {
       card.style.setProperty("--rx", "0deg");
       card.style.setProperty("--ry", "0deg");
     });
   });
-
-  const heroStage = document.querySelector(".hero-stage");
-  const stageTilt = document.querySelector(".stage-tilt");
-
-  if (heroStage && stageTilt) {
-    heroStage.addEventListener("mousemove", (event) => {
-      const rect = heroStage.getBoundingClientRect();
-      const px = (event.clientX - rect.left) / rect.width - 0.5;
-      const py = (event.clientY - rect.top) / rect.height - 0.5;
-      stageTilt.style.setProperty("--rx", `${clamp(8 - py * 16, -8, 20)}deg`);
-      stageTilt.style.setProperty("--ry", `${clamp(-12 + px * 20, -28, 4)}deg`);
-    });
-    heroStage.addEventListener("mouseleave", () => {
-      stageTilt.style.setProperty("--rx", "8deg");
-      stageTilt.style.setProperty("--ry", "-12deg");
-    });
-  }
 }
 
-/* Scroll reveal */
-const revealItems = document.querySelectorAll(".reveal");
-
-if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(
-    (entries, currentObserver) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
-        currentObserver.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.12 },
-  );
-
-  revealItems.forEach((item) => observer.observe(item));
-} else {
-  revealItems.forEach((item) => item.classList.add("is-visible"));
-}
-
-/* Hero line stagger with anime.js */
-const heroLines = document.querySelectorAll(".hero-title .line");
-
-heroLines.forEach((line) => {
-  const span = document.createElement("span");
-  span.textContent = line.textContent;
-  line.textContent = "";
-  line.appendChild(span);
+/* Press feedback for touch, pen and mouse */
+document.querySelectorAll("button, .button, [data-interactive-card], .project-piece").forEach((element) => {
+  element.addEventListener("pointerdown", () => element.classList.add("is-pressed"));
+  ["pointerup", "pointercancel", "pointerleave"].forEach((eventName) => {
+    element.addEventListener(eventName, () => element.classList.remove("is-pressed"));
+  });
 });
 
-if (window.anime) {
-  /* Hero intro (title + supporting copy) is CSS-driven for reliability.
-     anime.js only handles the ambient float loops below. */
-
-  /* Keep each mock's static 3D offset (set in CSS) while animating a float loop on top of it. */
-  anime({
-    targets: ".hero-stage .mock-post",
-    translateZ: 60,
-    rotate: -6,
-    translateY: [
-      { value: -14, duration: 2600 },
-      { value: 0, duration: 2600 },
-    ],
-    loop: true,
-    easing: "easeInOutSine",
-  });
-  anime({
-    targets: ".hero-stage .mock-brand",
-    translateZ: 110,
-    rotate: 4,
-    translateY: [
-      { value: 10, duration: 3100 },
-      { value: 0, duration: 3100 },
-    ],
-    loop: true,
-    easing: "easeInOutSine",
-  });
-  anime({
-    targets: ".hero-stage .mock-banner",
-    translateZ: 20,
-    rotate: 3,
-    translateY: [
-      { value: -8, duration: 3600 },
-      { value: 0, duration: 3600 },
-    ],
-    loop: true,
-    easing: "easeInOutSine",
-  });
+/* Scroll reveals */
+const revealItems = document.querySelectorAll(".reveal");
+if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+  revealItems.forEach((item) => item.classList.add("is-visible"));
 } else {
-  document.querySelectorAll(".hero-title .line span").forEach((span) => {
-    span.style.transform = "translateY(0)";
-  });
-  document
-    .querySelectorAll(".hero-eyebrow, .hero-lead, .hero-actions, .scroll-note")
-    .forEach((el) => (el.style.opacity = "1"));
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.08, rootMargin: "0px 0px -5% 0px" });
+
+  revealItems.forEach((item) => revealObserver.observe(item));
 }
 
-/* Stacked project cards: scale + dim as the next card arrives */
-const stackCards = [...document.querySelectorAll(".stack-card")];
+/* Hero line entrance */
+document.querySelectorAll(".hero-title .line").forEach((line) => {
+  if (line.firstElementChild) return;
+  const content = document.createElement("span");
+  content.textContent = line.textContent;
+  line.textContent = "";
+  line.appendChild(content);
+});
 
-if (stackCards.length) {
+if (prefersReducedMotion) {
+  document.querySelectorAll(".hero-title .line span").forEach((line) => {
+    line.style.transform = "none";
+  });
+}
+
+/* Expandable services — click is the primary interaction */
+document.querySelectorAll("[data-interactive-card]").forEach((card) => {
+  const toggle = card.querySelector(".service-toggle");
+  if (!toggle) return;
+
+  toggle.addEventListener("click", () => {
+    const willOpen = !card.classList.contains("is-open");
+    const grid = card.closest(".interactive-service-grid");
+
+    grid?.querySelectorAll("[data-interactive-card].is-open").forEach((openCard) => {
+      if (openCard === card) return;
+      openCard.classList.remove("is-open");
+      openCard.querySelector(".service-toggle")?.setAttribute("aria-expanded", "false");
+    });
+
+    card.classList.toggle("is-open", willOpen);
+    toggle.setAttribute("aria-expanded", String(willOpen));
+  });
+});
+
+/* Project artwork reacts to hover position without moving the card itself */
+if (supportsFinePointer && !prefersReducedMotion) {
+  document.querySelectorAll(".project-piece").forEach((piece) => {
+    const art = piece.querySelector(".project-art");
+    if (!art) return;
+
+    piece.addEventListener("pointermove", (event) => {
+      const rect = piece.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      art.style.transform = `scale(1.025) translate3d(${x * -10}px, ${y * -10}px, 0)`;
+    });
+    piece.addEventListener("pointerleave", () => {
+      art.style.transform = "";
+    });
+  });
+}
+
+/* Legacy stacked cards on older project sections */
+const stackCards = [...document.querySelectorAll(".stack-card")];
+if (stackCards.length && !prefersReducedMotion) {
   const stickyTop = (index) => 96 + index * 26;
-  let ticking = false;
+  let stackFramePending = false;
 
   const updateStack = () => {
     stackCards.forEach((card, index) => {
       const next = stackCards[index + 1];
-      if (!next) {
-        card.style.transform = "";
-        card.style.filter = "";
-        return;
-      }
-      const nextTop = next.getBoundingClientRect().top;
-      const progress = Math.min(Math.max((stickyTop(index + 1) + 220 - nextTop) / 220, 0), 1);
-      card.style.transform = `perspective(1200px) rotateX(${6 * progress}deg) scale(${1 - 0.06 * progress}) translateY(${-14 * progress}px)`;
-      card.style.filter = `brightness(${1 - 0.2 * progress})`;
+      if (!next) return;
+      const progress = Math.min(Math.max((stickyTop(index + 1) + 220 - next.getBoundingClientRect().top) / 220, 0), 1);
+      card.style.transform = `perspective(1200px) rotateX(${5 * progress}deg) scale(${1 - 0.045 * progress}) translateY(${-12 * progress}px)`;
+      card.style.filter = `brightness(${1 - 0.12 * progress})`;
     });
-    ticking = false;
+    stackFramePending = false;
   };
 
-  const requestUpdate = () => {
-    if (ticking) return;
-    ticking = true;
+  const requestStackUpdate = () => {
+    if (stackFramePending) return;
+    stackFramePending = true;
     requestAnimationFrame(updateStack);
   };
 
-  window.addEventListener("scroll", requestUpdate, { passive: true });
-  window.addEventListener("resize", requestUpdate);
-  requestUpdate();
+  window.addEventListener("scroll", requestStackUpdate, { passive: true });
+  window.addEventListener("resize", requestStackUpdate);
+  requestStackUpdate();
 }
 
-/* ============================================================
-   PRELOADER
-   ============================================================ */
-(function () {
-  const preloader = document.getElementById("preloader");
-  if (!preloader) return;
-
-  const dismiss = () => {
-    preloader.classList.add("is-done");
-    setTimeout(() => preloader.remove(), 1000);
-  };
-
-  if (sessionStorage.getItem("hz-visited")) {
-    preloader.style.display = "none";
-    return;
-  }
-
-  sessionStorage.setItem("hz-visited", "1");
-  setTimeout(dismiss, 1650);
-})();
-
-/* ============================================================
-   HEADER SCROLL SHADOW
-   ============================================================ */
-(function () {
-  const header = document.getElementById("siteHeader");
-  if (!header) return;
-
-  const update = () => {
-    header.classList.toggle("is-scrolled", window.scrollY > 12);
-  };
-
-  window.addEventListener("scroll", update, { passive: true });
-  update();
-})();
-
-/* ============================================================
-   3D SLIDER
-   ============================================================ */
+/* 3D coverflow on proyectos.html */
 class Slider3D {
-  constructor(stageEl) {
-    this.stage = stageEl;
-    this.slides = [...stageEl.querySelectorAll(".slide3d")];
+  constructor(stageElement) {
+    this.stage = stageElement;
+    this.slides = [...stageElement.querySelectorAll(".slide3d")];
     this.total = this.slides.length;
     this.current = 0;
     this.timer = null;
+    this.reducedMotion = prefersReducedMotion;
 
-    const prevBtn = document.getElementById("sliderPrev");
-    const nextBtn = document.getElementById("sliderNext");
-    const bulletsEl = document.getElementById("sliderBullets");
+    document.getElementById("sliderPrev")?.addEventListener("click", () => this.go(this.current - 1));
+    document.getElementById("sliderNext")?.addEventListener("click", () => this.go(this.current + 1));
 
-    if (prevBtn) prevBtn.addEventListener("click", () => this.go(this.current - 1));
-    if (nextBtn) nextBtn.addEventListener("click", () => this.go(this.current + 1));
-
-    if (bulletsEl) {
-      this.bulletsEl = bulletsEl;
-      this.slides.forEach((_, i) => {
-        const b = document.createElement("button");
-        b.className = "slider3d-bullet";
-        b.setAttribute("aria-label", `Proyecto ${i + 1}`);
-        b.addEventListener("click", () => this.go(i));
-        bulletsEl.appendChild(b);
-      });
-    }
-
-    // Touch / drag
-    let startX = 0;
-    stageEl.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; }, { passive: true });
-    stageEl.addEventListener("touchend", (e) => {
-      const dx = e.changedTouches[0].clientX - startX;
-      if (Math.abs(dx) > 48) this.go(this.current + (dx > 0 ? -1 : 1));
+    this.bulletsElement = document.getElementById("sliderBullets");
+    this.slides.forEach((_, index) => {
+      if (!this.bulletsElement) return;
+      const bullet = document.createElement("button");
+      bullet.className = "slider3d-bullet";
+      bullet.type = "button";
+      bullet.setAttribute("aria-label", `Mostrar proyecto ${index + 1}`);
+      bullet.addEventListener("click", () => this.go(index));
+      this.bulletsElement.appendChild(bullet);
     });
 
-    // Mouse drag
-    let mouseDown = false;
-    stageEl.addEventListener("mousedown", (e) => { mouseDown = true; startX = e.clientX; });
-    stageEl.addEventListener("mouseup", (e) => {
-      if (!mouseDown) return;
-      mouseDown = false;
-      const dx = e.clientX - startX;
-      if (Math.abs(dx) > 48) this.go(this.current + (dx > 0 ? -1 : 1));
+    let dragStart = 0;
+    let isDragging = false;
+
+    stageElement.addEventListener("pointerdown", (event) => {
+      isDragging = true;
+      dragStart = event.clientX;
+      stageElement.setPointerCapture?.(event.pointerId);
     });
-    stageEl.addEventListener("mouseleave", () => { mouseDown = false; });
+    stageElement.addEventListener("pointerup", (event) => {
+      if (!isDragging) return;
+      isDragging = false;
+      const distance = event.clientX - dragStart;
+      if (Math.abs(distance) > 48) this.go(this.current + (distance > 0 ? -1 : 1));
+    });
+    stageElement.addEventListener("pointercancel", () => { isDragging = false; });
+    stageElement.addEventListener("pointerenter", () => this.stopAuto());
+    stageElement.addEventListener("pointerleave", () => {
+      isDragging = false;
+      this.startAuto();
+    });
+    stageElement.addEventListener("focusin", () => this.stopAuto());
+    stageElement.addEventListener("focusout", () => this.startAuto());
 
     this.update();
     this.startAuto();
   }
 
   go(index) {
+    if (!this.total) return;
     this.current = ((index % this.total) + this.total) % this.total;
     this.update();
     this.startAuto();
   }
 
+  stopAuto() {
+    window.clearInterval(this.timer);
+    this.timer = null;
+  }
+
   startAuto() {
-    clearInterval(this.timer);
-    this.timer = setInterval(() => this.go(this.current + 1), 5000);
+    this.stopAuto();
+    if (this.reducedMotion || document.hidden) return;
+    this.timer = window.setInterval(() => this.go(this.current + 1), 5200);
   }
 
   update() {
-    // Position config for 5-slide coverflow
-    // Index maps to: 0=center, 1=right1, 2=far-right, 3=far-left, 4=left1
-    const P = [
-      { ry:   0, tx:    0, s: 1.00, op: 1.00, zi: 10 },
-      { ry: -32, tx:  440, s: 0.84, op: 0.62, zi:  5 },
-      { ry: -52, tx:  700, s: 0.68, op: 0.00, zi:  1 },
-      { ry:  52, tx: -700, s: 0.68, op: 0.00, zi:  1 },
-      { ry:  32, tx: -440, s: 0.84, op: 0.62, zi:  5 },
+    const positions = [
+      { ry: 0, tx: 0, scale: 1, opacity: 1, z: 10 },
+      { ry: -30, tx: 440, scale: 0.84, opacity: 0.58, z: 5 },
+      { ry: -48, tx: 700, scale: 0.7, opacity: 0, z: 1 },
+      { ry: 48, tx: -700, scale: 0.7, opacity: 0, z: 1 },
+      { ry: 30, tx: -440, scale: 0.84, opacity: 0.58, z: 5 },
     ];
 
-    this.slides.forEach((slide, i) => {
-      const offset = (i - this.current + this.total) % this.total;
-      const p = P[offset] || P[2];
-      slide.style.transform = `translateX(calc(-50% + ${p.tx}px)) rotateY(${p.ry}deg) scale(${p.s})`;
-      slide.style.opacity = p.op;
-      slide.style.zIndex = p.zi;
+    this.slides.forEach((slide, index) => {
+      const offset = (index - this.current + this.total) % this.total;
+      const position = positions[offset] || positions[2];
+      slide.style.transform = `translateX(calc(-50% + ${position.tx}px)) rotateY(${position.ry}deg) scale(${position.scale})`;
+      slide.style.opacity = position.opacity;
+      slide.style.zIndex = position.z;
       slide.classList.toggle("is-active", offset === 0);
+      slide.setAttribute("aria-hidden", String(offset !== 0));
     });
 
-    document.querySelectorAll(".slider3d-bullet").forEach((b, i) => {
-      b.classList.toggle("is-active", i === this.current);
+    this.bulletsElement?.querySelectorAll(".slider3d-bullet").forEach((bullet, index) => {
+      const active = index === this.current;
+      bullet.classList.toggle("is-active", active);
+      bullet.setAttribute("aria-current", active ? "true" : "false");
     });
   }
 }
 
-// Init slider if stage exists
-(function () {
-  const stage = document.getElementById("slider3dStage");
-  if (stage) new Slider3D(stage);
-})();
+const sliderStage = document.getElementById("slider3dStage");
+if (sliderStage) new Slider3D(sliderStage);
 
-/* ============================================================
-   MOBILE TAB BAR — active state
-   ============================================================ */
-(function () {
-  const tabs = document.querySelectorAll(".mobile-tabbar .tab[data-tab]");
-  if (!tabs.length) return;
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) requestScrollUpdate();
+});
 
-  // Normalise current path: "/", "/index", "/index.html" all map to "/"
+/* Mobile tab active state */
+const tabs = document.querySelectorAll(".mobile-tabbar .tab[data-tab]");
+if (tabs.length) {
   let path = window.location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
-  if (path === "") path = "/";
+  if (!path) path = "/";
 
-  let matched = false;
   tabs.forEach((tab) => {
     const target = tab.getAttribute("data-tab");
-    const isActive = target === "/" ? path === "/" : path === target || path.startsWith(target + "/");
-    if (isActive) {
-      tab.classList.add("is-active");
-      tab.setAttribute("aria-current", "page");
-      matched = true;
-    }
+    const active = target === "/" ? path === "/" : path === target || path.startsWith(`${target}/`);
+    tab.classList.toggle("is-active", active);
+    if (active) tab.setAttribute("aria-current", "page");
   });
-
-  // Fallback to Inicio if nothing matched (e.g. legal pages)
-  if (!matched) {
-    const home = document.querySelector('.mobile-tabbar .tab[data-tab="/"]');
-    if (home && path === "/") home.classList.add("is-active");
-  }
-})();
+}

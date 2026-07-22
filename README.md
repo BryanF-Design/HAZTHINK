@@ -1,35 +1,40 @@
 # Sitio web HAZTHINK
 
-Página estática y autocontenida para HAZTHINK (diseño, impresión y publicidad).
+Experiencia web estática para HAZTHINK, estudio de diseño, impresión y publicidad.
 
-## Abrir
+## Abrir en local
 
-Abrir `index.html` en navegador, o servir la carpeta con cualquier servidor estático
-(ej. `python3 -m http.server`).
+```powershell
+python -m http.server 4173 --bind 127.0.0.1
+```
 
-## Estructura
+Después abre `http://127.0.0.1:4173/`. En Vercel, `vercel.json` mantiene las rutas limpias (`/nosotros`, `/proyectos`, etc.).
 
-- `index.html` — marcado y contenido de todas las secciones.
-- `styles.css` — estilos, paleta de marca y animaciones.
-- `app.js` — cursor personalizado, menú móvil, animaciones de scroll y el efecto de
-  tarjetas apiladas en "Proyectos".
-- `assets/js/anime.min.js` — [anime.js](https://animejs.com/) v3.2.2, incluido localmente
-  para no depender de una CDN externa.
-- `assets/fonts/` — Fraunces (títulos) e Inter (texto).
+## Experiencia
 
-## Pendiente
+- Hero inmersivo con el **Color Bloom** de HAZTHINK construido en Three.js.
+- Movimiento conectado al scroll, arrastre, clic y presión sostenida.
+- Tarjetas de servicios expandibles por clic o teclado.
+- Respuesta magnética, cursor contextual y estados de presión para puntero y tacto.
+- Diseño responsive con navegación inferior móvil y fallback estático si WebGL no está disponible.
+- Soporte de `prefers-reduced-motion`, foco visible y navegación semántica.
 
-- Sustituir el logotipo real de HAZTHINK (actualmente el header usa un wordmark de texto)
-  en cuanto se reciba el archivo vectorial.
-- Reemplazar las tarjetas de ejemplo de "Proyectos" con casos reales conforme estén
-  disponibles.
+## Archivos principales
 
-## Cotización (histórico)
+- `index.html` — portada y contenido principal.
+- `styles.css` — estilos históricos compartidos con las páginas interiores.
+- `experience.css` — sistema visual y responsive del rediseño.
+- `app.js` — navegación, scroll, clic, hover, reveals y slider.
+- `three-experience.js` — escena Three.js e interacción del Color Bloom.
+- `assets/hazthink-logo-transparent.png` — logotipo final recortado con canal alfa.
+- `assets/hazthink-favicon.png` — isotipo transparente optimizado para pestañas y accesos directos.
+- `AUDITORIA_UX.md` — hallazgos, decisiones y validación del rediseño.
 
-La propuesta original que se usó para vender el proyecto a HAZTHINK (COT-HAZTHINK-2026-001)
-vive en [`cotizacion/`](./cotizacion/) y ya no se publica desde la raíz del sitio.
+## Dependencias
 
-## Publicar
+- `assets/js/anime.min.js` está incluido localmente.
+- Three.js está fijado a `0.184.0` mediante un módulo ESM de jsDelivr.
 
-Subir la carpeta completa a cualquier hosting estático (configurado para Vercel via
-`vercel.json`). La carpeta `cotizacion/` es interna y no debe enlazarse desde el sitio público.
+## Contenido pendiente
+
+Las piezas de proyectos siguen identificadas como muestras conceptuales. Deben sustituirse por casos reales cuando HAZTHINK entregue fotografías y resultados aprobados.
