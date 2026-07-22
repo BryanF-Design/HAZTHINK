@@ -1,63 +1,69 @@
-# Auditoría UX y visual — HAZTHINK
+# Auditoría UX, visual y técnica — HAZTHINK
 
 Fecha: 21 de julio de 2026
 
-## Objetivo de la página
+## Objetivo
 
-Presentar con claridad el alcance de HAZTHINK y convertir el interés en una conversación de cotización por WhatsApp, tanto en escritorio como en móvil.
+Convertir el sitio en una experiencia reconocible de HAZTHINK: rosa como tinta base, color de marca como sistema, interacción con propósito y una ruta clara hacia WhatsApp. Debe funcionar igual de bien en escritorio, móvil, teclado y movimiento reducido.
 
-## Hallazgos iniciales
+## Fallos confirmados en la revisión
 
-1. **El logotipo perdía presencia.** Se mostraba desde un JPG cuadrado con fondo blanco y demasiado espacio alrededor. En header, hero y footer quedaba visualmente pequeño.
-2. **La identidad del sitio no nacía de la marca.** El rosa pastel dominaba la interfaz aunque no forma parte del sistema cromático principal del loto de HAZTHINK.
-3. **El hero dependía de mockups genéricos.** Las tarjetas flotantes comunicaban “diseño”, pero no construían una experiencia propia de HAZTHINK.
-4. **La experiencia móvil invertía la prioridad.** El objeto visual ocupaba demasiado espacio antes del mensaje y el logotipo del header quedaba reducido.
-5. **La interacción estaba concentrada en hover.** Tilt y cursor funcionaban con mouse, pero no existía una respuesta equivalente clara para clic, presión sostenida o tacto.
-6. **La entrada tenía fricción innecesaria.** El preloader retrasaba el contenido sin aportar información.
-7. **Las muestras podían confundirse con casos reales.** El sitio ya usaba ejemplos, pero la distinción necesitaba ser más visible y consistente.
+1. El footer heredaba `max-width: 1360px`; en pantallas mayores dejaba franjas blancas laterales.
+2. El archivo del logotipo conserva proporción vertical, pero se mostraba más alto que el header. El wordmark invadía la sección siguiente.
+3. En móvil el logo no estaba anclado al centro real del viewport.
+4. El cursor usaba `mix-blend-mode: difference`; sobre el header claro podía desaparecer.
+5. Las páginas Nosotros, Proyectos, Contacto y legales conservaban gran parte de la composición previa.
+6. El amarillo y el azul dominaban la interfaz aunque se pidió rosa como base.
+7. No existía una transición de entrada con identidad.
+8. Faltaban reglas completas para cambio de página, parallax controlado y presión sostenida fuera del objeto 3D.
 
-## Dirección aplicada
+## Dirección aplicada: Pink Press
 
-La nueva dirección usa la figura real del loto como sistema de movimiento. El azul, verde, amarillo, naranja y morado de la marca organizan servicios, etapas y llamadas a la acción. El fondo oscuro del hero crea contraste, mientras que el resto alterna papel claro, tinta y bloques de color sólido.
+El rosa funciona como tinta matriz. Azul, verde, amarillo, naranja y morado se usan como marcas de registro y categorías, no como fondos aleatorios. El lenguaje mezcla impresión editorial, líneas de corte, retículas, tipografía sobredimensionada y el loto real de HAZTHINK.
 
-La única pieza deliberadamente espectacular es el **Color Bloom** 3D. El resto del sitio mantiene tipografía, jerarquía, espacio y movimiento más contenidos para evitar una experiencia saturada.
+Las referencias se usaron por patrón, no por copia:
 
-## Mapa de interacción
-
-| Acción | Respuesta |
-|---|---|
-| Scroll | Ensambla, gira y abre ligeramente el loto; activa reveals y progreso superior. |
-| Hover | Cursor contextual, magnetismo sutil, movimiento de arte y estados cromáticos. |
-| Clic | Abre entregables de servicios y dispara un pulso de color en el loto. |
-| Mantener presionado | Separa las piezas del Color Bloom y cambia el estado anunciado. |
-| Arrastrar | Gira manualmente el objeto tridimensional. |
-| Teclado | Abre servicios, activa la presión del loto y muestra foco visible. |
+- collage geométrico y rosa protagonista;
+- preloader de pantalla completa con identidad;
+- objeto central grande y anotaciones;
+- tipografía outline y composición asimétrica;
+- botones e interacción con respuesta física.
 
 ## Mejoras implementadas
 
-- Logotipo fiel al original, recortado, con fondo transparente y adaptación de tinta para superficies oscuras.
-- Hero y cierre totalmente rediseñados.
-- Three.js real con pétalos extruidos, iluminación, partículas y fallback.
-- Servicios expandibles con entregables concretos.
-- Proceso secuencial sticky en escritorio y lineal en móvil.
-- Galería conceptual etiquetada sin inventar clientes, métricas ni resultados.
-- Navegación, footer y páginas interiores alineadas al nuevo sistema.
-- Eliminación del preloader.
-- Movimiento reducido, foco visible, nombres accesibles y controles operables con teclado.
-- Límite de densidad de píxeles y pausa de render fuera del viewport para controlar el costo de WebGL.
+- Footer full-bleed al 100% del viewport, sin límite heredado.
+- Logotipo transparente con proporción estable y mayor presencia.
+- Header de 104 px en escritorio y 96 px en móvil; logo centrado matemáticamente en 390 px.
+- Cursor sólido con borde y sombra; visible en rosa, blanco y vino.
+- Preloader propio de “registro de color”, con progreso breve y salida en hoja.
+- Transición rosa entre rutas internas.
+- Rosa base en home, páginas internas, CTA, preloader y footer.
+- Nuevos héroes editoriales para Nosotros, Proyectos y Contacto.
+- Componentes internos reconstruidos: estadísticas, pilares, coverflow, tarjetas de contacto y documentos legales.
+- Parallax limitado a capas concretas y transform-only.
+- Clic, hover, pressed y hold en servicios; scroll, clic, hold y drag en Three.js.
+- Navegación móvil inferior conservada; targets táctiles de 44 px.
+- `prefers-reduced-motion` elimina parallax y deja el contenido visible.
+- SEO base: metadatos indexables, Open Graph, JSON-LD de servicio profesional y `robots.txt`.
+- Cabeceras de seguridad en Vercel: nosniff, SAMEORIGIN, referrer policy y permissions policy.
 
 ## Validación realizada
 
-- JavaScript validado con `node --check` en `app.js` y `three-experience.js`.
-- Three.js inicializa correctamente en navegador y el fallback permanece disponible.
-- Las 24 entradas animadas se activaron al recorrer la página.
-- Apertura de servicios confirmada: `aria-expanded` cambia y el contenido se vuelve visible.
-- Presión sostenida confirmada: estado activo durante la presión y liberación correcta.
-- Vista móvil comprobada a 390 × 844 px, sin desbordamiento horizontal.
-- Header, navegación inferior y logotipos comprobados en móvil.
-- Las combinaciones principales de texto y superficie mantienen al menos 4.58:1 de contraste.
-- `nosotros.html`, `proyectos.html`, `contacto.html`, `privacidad.html` y `terminos.html` respondieron correctamente en el servidor local.
+- Seis páginas probadas a 390 × 844 px: ancho de documento 390 px, sin scroll horizontal.
+- Footer medido a 1440 px sobre viewport de 1440 px; `max-width: none`.
+- Footer medido a 390 px sobre viewport de 390 px.
+- Logo móvil: centro 195 px sobre viewport con centro 195 px.
+- Todas las páginas mantienen un único `h1`.
+- Cero imágenes rotas y cero errores de consola en las seis páginas.
+- Preloader termina y libera el scroll.
+- Click de servicio: `aria-expanded="true"` y tarjeta abierta.
+- Hold de servicio: estado táctil activo después de 460 ms.
+- WebGL disponible y Color Bloom renderizado.
+- Reduced motion: 100% de reveals visibles y cero capas de parallax.
+- `node --check` aprobado para `app.js` y `three-experience.js`.
+- `git diff --check` aprobado.
 
-## Pendiente de contenido real
+## Pendientes de publicación
 
-Las muestras visuales son deliberadamente conceptuales. La siguiente mejora editorial debe sustituirlas por proyectos reales aprobados, con fotografías y contexto entregados por HAZTHINK.
+- Falta el dominio final para agregar canonical y generar un sitemap XML válido con URLs absolutas.
+- Las muestras siguen etiquetadas como conceptuales. Deben sustituirse por casos reales aprobados cuando existan fotos y resultados verificables.

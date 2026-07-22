@@ -1,6 +1,37 @@
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const supportsFinePointer = window.matchMedia("(pointer: fine)").matches;
 
+/* Print-registration loader. Short, deterministic and never blocks accessibility. */
+const preloader = document.querySelector("[data-preloader]");
+const loaderCount = document.querySelector("[data-loader-count]");
+const loaderStartedAt = performance.now();
+
+if (preloader) {
+  document.body.classList.add("preloading");
+  const loaderDuration = prefersReducedMotion ? 120 : 980;
+
+  const renderLoader = (now) => {
+    const progress = Math.min((now - loaderStartedAt) / loaderDuration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    preloader.style.setProperty("--loader-progress", eased.toFixed(4));
+    if (loaderCount) loaderCount.textContent = String(Math.round(eased * 100)).padStart(2, "0");
+    if (progress < 1) requestAnimationFrame(renderLoader);
+  };
+
+  requestAnimationFrame(renderLoader);
+
+  const dismissLoader = () => {
+    const elapsed = performance.now() - loaderStartedAt;
+    const remaining = Math.max(loaderDuration - elapsed, 0);
+    window.setTimeout(() => {
+      preloader.classList.add("is-done");
+      document.body.classList.remove("preloading");
+    }, remaining);
+  };
+
+  dismissLoader();
+}
+
 /* Preserve the brand colors while turning only near-black ink white on dark surfaces. */
 if (!document.getElementById("hazthink-filter-defs")) {
   document.body.insertAdjacentHTML("afterbegin", `
@@ -47,6 +78,26 @@ navToggle?.addEventListener("click", () => {
 mainNav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeNavigation));
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") closeNavigation();
+});
+
+/* Same-site page transition reuses the loader as a pink print-sheet wipe. */
+document.querySelectorAll("a[href]").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    if (!preloader || event.defaultPrevented || event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (link.target === "_blank" || link.hasAttribute("download")) return;
+
+    const destination = new URL(link.href, window.location.href);
+    if (destination.origin !== window.location.origin) return;
+    if (destination.pathname === window.location.pathname && destination.hash) return;
+
+    event.preventDefault();
+    preloader.classList.add("is-returning");
+    document.body.classList.add("preloading");
+    window.setTimeout(() => {
+      window.location.assign(destination.href);
+    }, prefersReducedMotion ? 20 : 360);
+  });
 });
 
 /* Current year */
@@ -161,6 +212,22 @@ document.querySelectorAll("button, .button, [data-interactive-card], .project-pi
   });
 });
 
+/* Hold state: an optional tactile preview; click remains the accessible primary action. */
+document.querySelectorAll("[data-interactive-card]").forEach((card) => {
+  let holdTimer = 0;
+  const clearHold = () => {
+    window.clearTimeout(holdTimer);
+    card.classList.remove("is-holding");
+  };
+
+  card.addEventListener("pointerdown", () => {
+    holdTimer = window.setTimeout(() => card.classList.add("is-holding"), 460);
+  });
+  ["pointerup", "pointercancel", "pointerleave"].forEach((eventName) => {
+    card.addEventListener(eventName, clearHold);
+  });
+});
+
 /* Scroll reveals */
 const revealItems = document.querySelectorAll(".reveal");
 if (prefersReducedMotion || !("IntersectionObserver" in window)) {
@@ -175,6 +242,51 @@ if (prefersReducedMotion || !("IntersectionObserver" in window)) {
   }, { threshold: 0.08, rootMargin: "0px 0px -5% 0px" });
 
   revealItems.forEach((item) => revealObserver.observe(item));
+}
+
+/* Controlled parallax: transform-only, viewport-bound and disabled for reduced motion. */
+const parallaxDefinitions = [
+  [".hero-logo", -0.08],
+  [".hero-orbit-one", -0.14],
+  [".hero-orbit-two", 0.1],
+  [".contact-watermark", -0.07],
+  [".process-glyph", 0.055],
+  [".page-hero-wrap::after", 0],
+];
+
+const parallaxLayers = [];
+if (!prefersReducedMotion) {
+  parallaxDefinitions.forEach(([selector, speed]) => {
+    if (!speed || selector.includes("::")) return;
+    document.querySelectorAll(selector).forEach((element) => {
+      element.classList.add("parallax-layer");
+      parallaxLayers.push({ element, speed });
+    });
+  });
+}
+
+let parallaxFramePending = false;
+const updateParallax = () => {
+  const viewportCenter = window.innerHeight / 2;
+  parallaxLayers.forEach(({ element, speed }) => {
+    const rect = element.getBoundingClientRect();
+    const distance = rect.top + rect.height / 2 - viewportCenter;
+    const offset = Math.max(-70, Math.min(70, distance * speed));
+    element.style.setProperty("--parallax-y", `${offset.toFixed(2)}px`);
+  });
+  parallaxFramePending = false;
+};
+
+const requestParallaxUpdate = () => {
+  if (parallaxFramePending || !parallaxLayers.length) return;
+  parallaxFramePending = true;
+  requestAnimationFrame(updateParallax);
+};
+
+if (parallaxLayers.length) {
+  window.addEventListener("scroll", requestParallaxUpdate, { passive: true });
+  window.addEventListener("resize", requestParallaxUpdate);
+  requestParallaxUpdate();
 }
 
 /* Hero line entrance */
