@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { gsap } from "@/lib/gsap";
-import { prefersReducedMotion } from "@/lib/loader";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { prefersReducedMotion, setTransitioning } from "@/lib/loader";
 import { useT } from "@/lib/i18n";
 
 const cols = ["var(--pink)", "var(--blue)", "var(--green)", "var(--yellow)", "var(--orange)", "var(--purple)"];
@@ -28,15 +28,21 @@ export default function PageTransition() {
       }
       if (pending.current) return;
       pending.current = true;
+      setTransitioning(true);
+      // Fetch the next route while the columns cover the screen, so push is instant.
+      router.prefetch(href);
       if (label.current) label.current.textContent = labels.current[routeKeys[href as keyof typeof routeKeys]] ?? "HAZTHINK";
       const q = gsap.utils.selector(root.current);
-      window.__lenis?.stop();
       gsap
         .timeline()
         .set(root.current, { visibility: "visible" })
-        .fromTo(q(".pt-col"), { yPercent: 100 }, { yPercent: 0, duration: 0.6, stagger: 0.05, ease: "expo.inOut" })
-        .fromTo(q(".pt-label"), { yPercent: 120 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, "-=0.25")
-        .add(() => router.push(href));
+        .fromTo(q(".pt-col"), { y: 0, yPercent: 100 }, { yPercent: 0, duration: 0.6, stagger: 0.05, ease: "expo.inOut" })
+        .fromTo(q(".pt-label"), { y: 0, yPercent: 120 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, "-=0.25")
+        // Stopping Lenis toggles overflow on <html> (a full repaint), so do it once covered.
+        .add(() => {
+          window.__lenis?.stop();
+          router.push(href);
+        });
     };
     window.addEventListener("hz:navigate", onNavigate);
     return () => window.removeEventListener("hz:navigate", onNavigate);
@@ -45,15 +51,29 @@ export default function PageTransition() {
   useEffect(() => {
     if (!pending.current || !root.current) return;
     const q = gsap.utils.selector(root.current);
-    gsap
-      .timeline({ delay: 0.15 })
-      .to(q(".pt-label"), { yPercent: -120, duration: 0.4, ease: "expo.in" })
-      .to(q(".pt-col"), { yPercent: -100, duration: 0.7, stagger: 0.05, ease: "expo.inOut" }, "-=0.1")
-      .add(() => {
-        pending.current = false;
-        window.__lenis?.start();
-      }, "-=0.35")
-      .set(root.current, { visibility: "hidden" });
+    let tl: gsap.core.Timeline | undefined;
+    // Let the new page mount and measure (ScrollTrigger refresh) while still covered,
+    // then uncover with nothing else competing for the main thread.
+    let raf = requestAnimationFrame(() => {
+      raf = requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+        tl = gsap
+          .timeline({ delay: 0.1 })
+          .to(q(".pt-label"), { yPercent: -120, duration: 0.4, ease: "expo.in" })
+          // Intros start as the columns lift, so the page animates into view.
+          .add(() => setTransitioning(false), "-=0.1")
+          .to(q(".pt-col"), { yPercent: -100, duration: 0.7, stagger: 0.05, ease: "expo.inOut" }, "-=0.1")
+          .add(() => {
+            pending.current = false;
+            window.__lenis?.start();
+          }, "-=0.35")
+          .set(root.current, { visibility: "hidden" });
+      });
+    });
+    return () => {
+      cancelAnimationFrame(raf);
+      tl?.progress(1);
+    };
   }, [pathname]);
 
   return (

@@ -83,7 +83,7 @@ export default function Preloader() {
       .to(q(".pl-stage"), { scale: 0.7, autoAlpha: 0, duration: 0.6 * speed, ease: "expo.in" }, "<0.1")
       .fromTo(
         q(".pl-col"),
-        { yPercent: 100 },
+        { y: 0, yPercent: 100 },
         { yPercent: 0, stagger: 0.06, duration: 0.55 * speed, ease: "expo.inOut" },
         "<0.15",
       )

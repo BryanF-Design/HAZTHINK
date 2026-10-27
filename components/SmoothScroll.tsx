@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { prefersReducedMotion } from "@/lib/loader";
+import { isTransitioning, prefersReducedMotion } from "@/lib/loader";
 
 declare global {
   interface Window {
@@ -36,6 +36,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   useEffect(() => {
     window.__lenis?.scrollTo(0, { immediate: true, force: true });
     window.scrollTo(0, 0);
+    // During a wipe, PageTransition refreshes before uncovering; avoid a second mid-animation refresh.
+    if (isTransitioning()) return;
     const id = window.setTimeout(() => ScrollTrigger.refresh(), 120);
     return () => window.clearTimeout(id);
   }, [pathname]);

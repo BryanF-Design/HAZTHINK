@@ -27,3 +27,27 @@ export function onSiteReady(fn: () => void) {
 export const prefersReducedMotion = () =>
   typeof window !== "undefined" &&
   (document.documentElement.classList.contains("reduced") || window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+// Page-transition signal: heavy work (WebGL, intro timelines) waits until the
+// colour columns have uncovered the new page so the wipe never stutters.
+let transitioning = false;
+const revealListeners = new Set<() => void>();
+
+export const isTransitioning = () => transitioning;
+
+export function setTransitioning(value: boolean) {
+  transitioning = value;
+  if (!value) {
+    revealListeners.forEach((fn) => fn());
+    revealListeners.clear();
+  }
+}
+
+export function whenRevealed(fn: () => void) {
+  if (!transitioning) {
+    fn();
+    return () => {};
+  }
+  revealListeners.add(fn);
+  return () => revealListeners.delete(fn);
+}
