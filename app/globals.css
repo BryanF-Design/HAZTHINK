@@ -1701,9 +1701,19 @@ img.mf-sticker {
   border-radius: var(--radius);
   background: var(--bg);
   color: var(--fg);
+  position: relative;
   transform-origin: 50% 0;
   box-shadow: 0 -20px 60px rgba(23, 10, 18, 0.12);
   will-change: transform;
+}
+.svc-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  background: var(--ink);
+  opacity: 0;
+  pointer-events: none;
 }
 .svc-meta {
   display: flex;

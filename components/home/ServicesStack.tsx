@@ -47,13 +47,9 @@ export default function ServicesStack() {
         cards.forEach((card, i) => {
           const next = cards[i + 1];
           if (next) {
-            gsap.to(card.querySelector(".svc-inner"), {
-              scale: 0.9,
-              rotate: i % 2 ? 1.5 : -1.5,
-              filter: "brightness(0.7)",
-              ease: "none",
-              scrollTrigger: { trigger: next, start: "top bottom", end: () => `top ${Math.max(10, parseFloat(next.style.top) || 100)}px`, scrub: true },
-            });
+            const st = { trigger: next, start: "top bottom", end: () => `top ${Math.max(10, parseFloat(next.style.top) || 100)}px`, scrub: true };
+            gsap.fromTo(card.querySelector(".svc-inner"), { scale: 1, rotate: 0 }, { scale: 0.9, rotate: i % 2 ? 1.5 : -1.5, ease: "none", scrollTrigger: st });
+            gsap.fromTo(card.querySelector(".svc-shade"), { opacity: 0 }, { opacity: 0.28, ease: "none", scrollTrigger: { ...st } });
           }
           gsap.fromTo(
             card.querySelector(".art"),
@@ -95,6 +91,7 @@ export default function ServicesStack() {
               aria-labelledby={`svc-${i}`}
             >
               <div className="svc-inner">
+                <span className="svc-shade" aria-hidden="true" />
                 <div className="svc-copy">
                   <div className="svc-meta">
                     <span className="svc-num">0{i + 1}</span>
